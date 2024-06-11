@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
+    let students = ["Гарри", "Гермиона", "Рон"]
+    @State private var chosenStudent = "Гарри"
+    
     @State private var tapCount = 0
     @State private var name = ""
     
@@ -18,12 +21,20 @@ struct ContentView: View {
                     TextField("Name here", text: $name)
                     Text("Your name is \(name)")
                 }
+                Section {
+                    Picker("Выберите студента", selection: $chosenStudent) {
+                        ForEach (students, id: \.self) {
+                            Text($0)
+                        }
+                    }
+                    Text("На данный момент выбран \(chosenStudent)")
+                }
+                
                 Button("Tap count: \(tapCount)") {
                     self.tapCount += 1
                 }
             }
             .navigationTitle("WeSplit")
-            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }
